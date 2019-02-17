@@ -1,6 +1,7 @@
 ### Hadoop Avro - Parquet Performance Comparission
 #### Introduction:
 __Avro:__ Avro is a data serialization standard for compact binary format widely used for storing persistent data on HDFS. One of the advantage of using avro is lightweight and fast data serialization and deserialization, which can deliver very good ingestion performance. Avro data can be described through language independent schema.  Hence avro format data can be shared across applications using different languages. Avro formatted files are splittable and compressible and hence good for data storage in HDFS.
+
 __Parquet:__ Parquet is column-oriented data serialization standard for efficient data analytics. Parquet standard can encode and compress files to very less size. It provides good compression up to 75% when used compression formats like snappy. Parquet is well suited for warehouse kind of solutions where aggregation are required on a certain column over a huge set of data.
 #### Implementation:
 This project is the implementation of converting text outputs of Pairwise Simiarlity Measure to Hadoop's Avro & Parquet file formats and comparing performances.
