@@ -5,8 +5,7 @@ __Parquet:__ Parquet is column-oriented data serialization standard for efficien
 #### Implementation:
 This project is the implementation of converting text outputs of Pairwise Simiarlity Measure to Hadoop's Avro & Parquet file formats and comparing performances.
 
-###### Pairwise Similarity Measure:
-https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
+###### Pairwise Similarity Measure: https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
 ##### Avro: 
 For writing the RDD to a avro file format, I have created SQLContext object from spark context that creates dataframe from RDD. Then used avro package from databricks to write the dataframe into avro file.
 ```
@@ -92,7 +91,8 @@ For each file format text, avro, parquet without compression and parquet with sn
 #### Results Section:
 ##### Inverted Index:
 ![Alt Text](stats/inverted_index_performance.JPG)
-Observation: From the results of Part -2 what I observed is that, even though the file formats text, avro, parquet without compression and parquet with snappy compression are used the execution time seemed to be relatively same having average execution time similar to other file formats but observable difference is there. Writing into text file format took little bit of extra time than writing into avro or parquet file formats. Parquet with snappy compression took more time than any other compared file format above. This I believe, since parquet snappy has to be stored in compressed format, it took little bit extra time for compressing files. When it comes to storage, text format files are occupying more space than avro, parquet without compression and parquet with snappy compression.  Avro stored files in 3x times smaller than that of text file format and parquet with snappy compression took 4x smaller space than text files.
+#### Observation: 
+From the results of Part -2 what I observed is that, even though the file formats text, avro, parquet without compression and parquet with snappy compression are used the execution time seemed to be relatively same having average execution time similar to other file formats but observable difference is there. Writing into text file format took little bit of extra time than writing into avro or parquet file formats. Parquet with snappy compression took more time than any other compared file format above. This I believe, since parquet snappy has to be stored in compressed format, it took little bit extra time for compressing files. When it comes to storage, text format files are occupying more space than avro, parquet without compression and parquet with snappy compression.  Avro stored files in 3x times smaller than that of text file format and parquet with snappy compression took 4x smaller space than text files.
 
 ##### Similarity Matrix:
 ![Alt Text](stats/similarity_matrix_performance.JPG)
