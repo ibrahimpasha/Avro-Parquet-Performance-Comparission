@@ -5,7 +5,8 @@ __Parquet:__ Parquet is column-oriented data serialization standard for efficien
 #### Implementation:
 This project is the implementation of converting text outputs of Pairwise Simiarlity Measure to Hadoop's Avro & Parquet file formats and comparing performances.
 
-######Pairwise Similarity Measure: https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
+###### Pairwise Similarity Measure:
+https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
 ##### Avro: 
 For writing the RDD to a avro file format, I have created SQLContext object from spark context that creates dataframe from RDD. Then used avro package from databricks to write the dataframe into avro file.
 ```
