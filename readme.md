@@ -4,14 +4,19 @@ __Avro:__ Avro is a data serialization standard for compact binary format widely
 __Parquet:__ Parquet is column-oriented data serialization standard for efficient data analytics. Parquet standard can encode and compress files to very less size. It provides good compression up to 75% when used compression formats like snappy. Parquet is well suited for warehouse kind of solutions where aggregation are required on a certain column over a huge set of data.
 #### Implementation:
 This project is the implementation of converting text outputs of Pairwise Simiarlity Measure to Hadoop's Avro & Parquet file formats and comparing performances.
+
 __Pairwise Similarity Measure:__ https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
 ##### Avro: 
 For writing the RDD to a avro file format, I have created SQLContext object from spark context that creates dataframe from RDD. Then used avro package from databricks to write the dataframe into avro file.
+
 `sqlContext = SQLContext(sc)
 df1 = sqlContext.createDataFrame(output, ['word', 'weight'])
 df1.write.format("com.databricks.spark.avro").save(outputFiles)`
+
 For reading the avro files first I have created DataFrame using SQL Context and then converted it to RDD.
+
 `inputAvro = sqlContext.read.format("com.databricks.spark.avro").load(inputFiles).rdd.map(tuple) `
+
 __Observation:__ I have mapped the RDD result from data frame to a tuple because my program reads further RDD as a tuple and without the conversion of tuple I was having trouble accessing elements inside tuple. That made me to not change any of the further code.
 ##### Parquet: 
 For writing the RDD to a parquet file format, I did the same method as I did for avro but written RDD into parquet using parquet package. Included compression option as None as parquet is storing files to default to snappy compressed.
