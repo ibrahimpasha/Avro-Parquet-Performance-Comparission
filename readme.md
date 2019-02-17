@@ -4,22 +4,22 @@ __Avro:__ Avro is a data serialization standard for compact binary format widely
 __Parquet:__ Parquet is column-oriented data serialization standard for efficient data analytics. Parquet standard can encode and compress files to very less size. It provides good compression up to 75% when used compression formats like snappy. Parquet is well suited for warehouse kind of solutions where aggregation are required on a certain column over a huge set of data.
 #### Implementation:
 This project is the implementation of converting text outputs of Pairwise Simiarlity Measure to Hadoop's Avro & Parquet file formats and comparing performances.
-Pairwise Similarity Measure: https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
+__Pairwise Similarity Measure:__ https://github.com/ibrahimpasha/Pairwise-Similarity-Measure
 ##### Avro: 
 For writing the RDD to a avro file format, I have created SQLContext object from spark context that creates dataframe from RDD. Then used avro package from databricks to write the dataframe into avro file.
 `sqlContext = SQLContext(sc)
 df1 = sqlContext.createDataFrame(output, ['word', 'weight'])
 df1.write.format("com.databricks.spark.avro").save(outputFiles)`
 For reading the avro files first I have created DataFrame using SQL Context and then converted it to RDD.
-inputAvro = sqlContext.read.format("com.databricks.spark.avro").load(inputFiles).rdd.map(tuple) 
+`inputAvro = sqlContext.read.format("com.databricks.spark.avro").load(inputFiles).rdd.map(tuple) `
 __Observation:__ I have mapped the RDD result from data frame to a tuple because my program reads further RDD as a tuple and without the conversion of tuple I was having trouble accessing elements inside tuple. That made me to not change any of the further code.
 ##### Parquet: 
 For writing the RDD to a parquet file format, I did the same method as I did for avro but written RDD into parquet using parquet package. Included compression option as None as parquet is storing files to default to snappy compressed.
-```
+`
 sqlContext = SQLContext(sc)
 df1 = sqlContext.createDataFrame(output, ['word', 'weight'])
 df1.write.option("compression", "none").parquet(outputFiles)
-```
+`
 For reading the parquet files first I have created DataFrame using SQL Context and then converted it to RDD. And mapped to a tuple as I did in avro.
 
 `inputAvro = sqlContext.read.parquet(inputFiles).rdd.map(tuple)`
@@ -33,7 +33,7 @@ For each file format text, avro, parquet without compression and parquet with sn
 ##### Text format:
 1.	Inverted Index Text:
 
-```spark-submit --master yarn --deploy-mode cluster --conf spark.ui.port=4070 --num-executors 5 --executor-cores 3  --executor-memory 10G pyspark_inverted_index.py /bigd43/hw3/1000_most_M/* /cosc6339_hw2/gutenberg-500/* /bigd43/hw3/inverted_text_M_1```
+`spark-submit --master yarn --deploy-mode cluster --conf spark.ui.port=4070 --num-executors 5 --executor-cores 3  --executor-memory 10G pyspark_inverted_index.py /bigd43/hw3/1000_most_M/* /cosc6339_hw2/gutenberg-500/* /bigd43/hw3/inverted_text_M_1`
 
 2.	Similarity Text:
 
